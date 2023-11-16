@@ -9,4 +9,11 @@ class Bear:
         return None
     
     def one_day(self):
+        """Simulate one day for a bear!"""
+        self.age += 1
+        self.hunger_score -= 1
         return None
+    
+    def eat(self, num_fish: int):
+        """Bear eats when it finds fish!"""
+        self.hunger_score += num_fish
