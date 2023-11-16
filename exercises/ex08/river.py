@@ -16,6 +16,12 @@ class River:
         for x in range(0, num_bears):
             self.bears.append(Bear())
 
+    def view_river(self):
+        """Print the river status."""
+        print(f"~~~ Day {self.day}: ~~~")
+        print(f"Fish population: {len(self.fish)}")
+        print(f"Bear population: {len(self.bears)}")
+
     def check_ages(self):
         return None
 
