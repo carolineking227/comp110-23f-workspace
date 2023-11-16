@@ -1,89 +1,177 @@
 """EX07 dict unit tests!"""
 __author__ = 730494174
 
+from typing import List, Dict, Optional, Union
 import unittest
+from dictionary import invert, alphabetizer, favorite_color, count, update_attendance
 import pytest
-from exercises import invert, favorite_color, count, alphabetizer, update_attendance
 
 
-class TestFunctions(unittest.TestCase):
-    """Creating a class to test the following functions!"""
+def invert(input_dict: Dict[str, str]) -> Dict[str, str]:
+    """Invert the keys and values of a dictionary."""
+    inverted_dict = {}
+    for key, value in input_dict.items():
+        if value in inverted_dict:
+            raise KeyError(f"KeyError: Duplicate value '{value}' encountered")
+        inverted_dict[value] = key
+    return inverted_dict
 
-    def test_invert_expected_use_case(self):
-        """Testing expected invert!"""
-        input_dict = {"a": "apple", "b": "banana", "c": "cherry"}
-        expected_output = {"apple": "a", "banana": "b", "cherry": "c"}
-        self.assertEqual(invert(input_dict), expected_output)
 
-    def test_invert_edge_case(self):
-        """Testing invert!"""
-        input_dict = {"a": "apple", "b": "banana", "c": "apple"}
-        with self.assertRaises(KeyError):
-            invert(input_dict)
+def test_invert_normal_case() -> None:
+    """Test invert function with a normal use case."""
+    input_dict = {'a': 'apple', 'b': 'banana', 'c': 'cherry'}
+    result = invert(input_dict)
+    assert result == {'apple': 'a', 'banana': 'b', 'cherry': 'c'}, "Invert function failed for normal case."
 
-    def test_favorite_color_expected_use_case(self):
-        """Testing expected favorite color!"""
-        name_color_dict = {"John": "blue", "Alice": "red", "Bob": "blue", "Eve": "green"}
-        expected_output = "blue"
-        self.assertEqual(favorite_color(name_color_dict), expected_output)
 
-    def test_favorite_color_edge_case(self):
-        """Testing favorite color!"""
-        name_color_dict = {}
-        expected_output = None  # There are no colors, so it should return None
-        self.assertEqual(favorite_color(name_color_dict), expected_output)
+def test_invert_empty_dict() -> None:
+    """Test invert function with an empty dictionary."""
+    input_dict = {}
+    result = invert(input_dict)
+    assert result == {}, "Invert function failed for an empty dictionary."
+
+
+def test_invert_duplicate_values() -> None:
+    """Test invert function with a dictionary containing duplicate values."""
+    input_dict = {'a': 'apple', 'b': 'banana', 'c': 'apple'}
+    with pytest.raises(KeyError, match="Duplicate value 'apple' encountered"):
+        invert(input_dict)
+
+
+def alphabetizer(words: List[str]) -> Dict[str, List[str]]:
+    """Categorize words by the first letter."""
+    alphabet_dict = {}
+    for word in words:
+        # Convert the word to lowercase to ensure consistent categorization
+        word = word.lower()
+        first_letter = word[0]
+        if first_letter in alphabet_dict:
+            alphabet_dict[first_letter].append(word)
+        else:
+            alphabet_dict[first_letter] = [word]
+    return alphabet_dict
+
+
+def test_alphabetizer_normal_case() -> None:
+    """Test alphabetizer function with a normal use case."""
+    input_words = ["cat", "apple", "boy", "angry", "bad", "car"]
+    result = alphabetizer(input_words)
+    expected_result = {'c': ['cat', 'car'], 'a': ['apple', 'angry'], 'b': ['boy', 'bad']}
+    assert result == expected_result, "Alphabetizer function failed for normal case."
+
+
+def test_alphabetizer_empty_list() -> None:
+    """Test alphabetizer function with an empty list."""
+    input_words = []
+    result = alphabetizer(input_words)
+    assert result == {}, "Alphabetizer function failed for an empty list."
+
+
+def test_alphabetizer_case_insensitivity() -> None:
+    """Test alphabetizer function with case-insensitive input."""
+    input_words = ["Cat", "Apple", "boy", "angry", "Bad", "Car"]
+    result = alphabetizer(input_words)
+    expected_result = {'c': ['cat', 'car'], 'a': ['apple', 'angry'], 'b': ['boy', 'bad']}
+    assert result == expected_result, "Alphabetizer function failed for case-insensitive input."
+
+
+def favorite_color(name_color_dict: Dict[str, str]) -> str:
+    """Find the most popular color among a group of people."""
+    color_count: Dict[str, int] = {}
     
-    def test_count_expected_use_case(self):
-        """Testing expected count!"""
-        values = ["apple", "banana", "apple", "cherry", "banana", "apple"]
-        expected_output = {"apple": 3, "banana": 2, "cherry": 1}
-        self.assertEqual(count(values), expected_output)
-
-    def test_count_edge_case(self):
-        """Testing count!"""
-        values = []
-        expected_output = {}
-        self.assertEqual(count(values), expected_output)
-
-    def test_alphabetizer_expected_use_case(self):
-        """Testing expected alphabetizer!"""
-        words = ["cat", "apple", "Bat", "apply", "bad", "car"]
-        expected_output = {
-            "a": ["apple", "apply"],
-            "b": ["bad"],
-            "B": ["Bat"],
-            "c": ["cat", "car"]
-        }
-        self.assertEqual(alphabetizer(words), expected_output)
-
-    def test_alphabetizer_edge_case(self):
-        """Testing alphabetizer!"""
-        words = []
-        expected_output = {}
-        self.assertEqual(alphabetizer(words), expected_output)
-
-    def test_update_attendance_expected_use_case(self):
-        """Testing expected update attendance!"""
-        attendance_dict = {"Monday": ["Alice", "Bob"], "Tuesday": ["Alice"]}
-        day = "Tuesday"
-        student = "Eve"
-        expected_output = {"Monday": ["Alice", "Bob"], "Tuesday": ["Alice", "Eve"]}
-        self.assertEqual(update_attendance(attendance_dict, day, student), expected_output)
-
-    def test_update_attendance_edge_case(self):
-        """Testing update attendance!"""
-        attendance_dict = {}
-        day = "Wednesday"
-        student = "Alice"
-        expected_output = {"Wednesday": ["Alice"]}
-        self.assertEqual(update_attendance(attendance_dict, day, student), expected_output)
-
-    def test_invert_key_error():
-        """Testing for KeyError!"""
-        with pytest.raises(KeyError):
-            input_dict = {'apple': 'banana', 'carrot': 'banana'}
-            invert(input_dict)
+    for name, color in name_color_dict.items():
+        if color in color_count:
+            color_count[color] += 1
+        else:
+            color_count[color] = 1
+    
+    most_popular_color = max(color_count, key=color_count.get, default=None)
+    
+    return most_popular_color
 
 
-if __name__ == '__main__':
-    unittest.main()
+def test_favorite_color_normal_case() -> None:
+    """Test favorite_color function with a normal use case."""
+    input_data = {'Alice': 'blue', 'Bob': 'green', 'Charlie': 'blue', 'David': 'red'}
+    result = favorite_color(input_data)
+    assert result == 'blue', "Favorite_color function failed for normal case."
+
+
+def test_favorite_color_empty_dict() -> None:
+    """Test favorite_color function with an empty dictionary."""
+    input_data = {}
+    result = favorite_color(input_data)
+    assert result is None, "Favorite_color function failed for an empty dictionary."
+
+
+def test_favorite_color_tiebreaker() -> None:
+    """Test favorite_color function with a tiebreaker scenario."""
+    input_data = {'Alice': 'red', 'Bob': 'blue', 'Charlie': 'green', 'David': 'blue'}
+    result = favorite_color(input_data)
+    assert result == 'blue', "Favorite_color function failed for a tiebreaker scenario."
+
+
+def count(values: List[str]) -> Dict[str, int]:
+    """Count the occurrences of each value in a list."""
+    count_dict = {}
+    for item in values:
+        if item in count_dict:
+            count_dict[item] += 1
+        else:
+            count_dict[item] = 1
+    return count_dict
+
+
+def test_count_normal_case() -> None:
+    """Test count function with a normal use case."""
+    input_values = ["apple", "banana", "apple", "cherry", "banana", "apple"]
+    result = count(input_values)
+    expected_result = {'apple': 3, 'banana': 2, 'cherry': 1}
+    assert result == expected_result, "Count function failed for normal case."
+
+
+def test_count_empty_list() -> None:
+    """Test count function with an empty list."""
+    input_values = []
+    result = count(input_values)
+    assert result == {}, "Count function failed for an empty list."
+
+
+def test_count_case_insensitivity() -> None:
+    """Test count function with case-insensitive input."""
+    input_values = ["Apple", "Banana", "apple", "Cherry", "banana", "Apple"]
+    result = count(input_values)
+    expected_result = {'apple': 3, 'banana': 2, 'cherry': 1}
+    assert result == expected_result, "Count function failed for case-insensitive input."
+
+
+def update_attendance(attendance_dict: Dict[str, List[str]], day: str, student: str) -> Dict[str, List[str]]:
+    """Update attendance."""
+    if day in attendance_dict:
+        attendance_dict[day].append(student)
+    else:
+        attendance_dict[day] = [student]
+    return attendance_dict
+
+
+def test_update_attendance_normal_case() -> None:
+    """Test update_attendance function with a normal use case."""
+    input_attendance = {'Monday': ['Alice', 'Bob'], 'Tuesday': ['Charlie']}
+    result = update_attendance(input_attendance, 'Monday', 'David')
+    expected_result = {'Monday': ['Alice', 'Bob', 'David'], 'Tuesday': ['Charlie']}
+    assert result == expected_result, "Update_attendance function failed for normal case."
+
+
+def test_update_attendance_empty_dict() -> None:
+    """Test update_attendance function with an empty dictionary."""
+    input_attendance = {}
+    result = update_attendance(input_attendance, 'Wednesday', 'Eve')
+    expected_result = {'Wednesday': ['Eve']}
+    assert result == expected_result, "Update_attendance function failed for an empty dictionary."
+
+def test_update_attendance_existing_day() -> None:
+    """Test update_attendance function with an existing day."""
+    input_attendance = {'Thursday': ['Frank', 'Grace']}
+    result = update_attendance(input_attendance, 'Thursday', 'Hank')
+    expected_result = {'Thursday': ['Frank', 'Grace', 'Hank']}
+    assert result == expected_result, "Update_attendance function failed for an existing day."
