@@ -1,9 +1,7 @@
 """EX07 dict unit tests!"""
 __author__ = 730494174
 
-from typing import List, Dict, Optional, Union
-import unittest
-from dictionary import invert, alphabetizer, favorite_color, count, update_attendance
+from typing import List, Dict
 import pytest
 
 
@@ -168,6 +166,7 @@ def test_update_attendance_empty_dict() -> None:
     result = update_attendance(input_attendance, 'Wednesday', 'Eve')
     expected_result = {'Wednesday': ['Eve']}
     assert result == expected_result, "Update_attendance function failed for an empty dictionary."
+
 
 def test_update_attendance_existing_day() -> None:
     """Test update_attendance function with an existing day."""
