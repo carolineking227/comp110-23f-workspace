@@ -40,8 +40,6 @@ def alphabetizer(words: List[str]) -> Dict[str, List[str]]:
     """Categorize words by the first letter."""
     alphabet_dict = {}
     for word in words:
-        # Convert the word to lowercase to ensure consistent categorization
-        word = word.lower()
         first_letter = word[0]
         if first_letter in alphabet_dict:
             alphabet_dict[first_letter].append(word)
@@ -65,14 +63,14 @@ def test_alphabetizer_empty_list() -> None:
     assert result == {}, "Alphabetizer function failed for an empty list."
 
 
-def test_alphabetizer_case_insensitivity() -> None:
-    """Test alphabetizer function with case-insensitive input."""
+def test_alphabetizer_case_sensitivity() -> None:
+    """Test alphabetizer function with case-sensitive input."""
     input_words = ["Cat", "Apple", "boy", "angry", "Bad", "Car"]
     result = alphabetizer(input_words)
-    expected_result = {'c': ['cat', 'car'], 'a': ['apple', 'angry'], 'b': ['boy', 'bad']}
-    assert result == expected_result, "Alphabetizer function failed for case-insensitive input."
+    expected_result = {'C': ['Cat', 'Car'], 'A': ['Apple'], 'b': ['boy', 'Bad'], 'a': ['angry']}
+    assert result == expected_result, "Alphabetizer function failed for case-sensitive input."
 
-
+    
 def favorite_color(name_color_dict: Dict[str, str]) -> str:
     """Find the most popular color among a group of people."""
     color_count: Dict[str, int] = {}
