@@ -8,7 +8,7 @@ from exercises.ex08.bear import Bear
 class River: 
     """Create a class river."""
     
-    def __init__(self, num_fish: int, num_bears:int): 
+    def __init__(self, num_fish: int, num_bears: int): 
         """New River with num_fish Fish and num_bears Bears."""
         self.day: int = 0
         self.fish: list[Fish] = []
@@ -18,12 +18,6 @@ class River:
             self.fish.append(Fish())
         for x in range(0, num_bears): 
             self.bears.append(Bear())
-
-    def view_river(self): 
-        """Print the river status."""
-        print(f"~~~ Day {self.day}: ~~~")
-        print(f"Fish population: {len(self.fish)}")
-        print(f"Bear population: {len(self.bears)}")
     
     def one_river_week(self): 
         """Simulate one week of life in the river!"""
@@ -84,6 +78,10 @@ class River:
         return None
     
     def view_river(self): 
+        """Print the river status."""
+        print(f"~~~ Day {self.day}: ~~~")
+        print(f"Fish population: {len(self.fish)}")
+        print(f"Bear population: {len(self.bears)}")
         return None
             
     def one_river_day(self):
