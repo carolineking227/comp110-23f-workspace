@@ -71,9 +71,6 @@ def test_alphabetizer_case_insensitivity() -> None:
     result = alphabetizer(input_words)
     expected_result = {'c': ['cat', 'car'], 'a': ['apple', 'angry'], 'b': ['boy', 'bad']}
     assert result == expected_result, "Alphabetizer function failed for case-insensitive input."
-    words = ["Apple", "banana", "Orange", "grape", "kiwi"]
-    sorted_words = sorted(words, key=lambda x: x.lower())
-    print(sorted_words)
 
 
 def favorite_color(name_color_dict: Dict[str, str]) -> str:
