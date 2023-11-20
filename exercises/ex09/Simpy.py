@@ -1,25 +1,29 @@
 """Utility class for numerical operations."""
 
 from __future__ import annotations
-from Simpy import Simpy
 from typing import Union
 
 __author__ = "730494174"
 
 
 class Simpy:
+    """Create class Simpy!"""
     values: list[float]
 
     def __init__(self, values):
+        """Define init values."""
         self.values = values
 
     def __str__(self):
+        """Define str."""
         return f"Simpy({self.values})"
     
     def fill(self, value, num_values):
+        """Define fill."""
         self.values = [value] * num_values
 
     def arange(self, start, stop=None, step=1.0):
+        """Define arrange."""
         assert step != 0.0, "Step cannot be 0.0"
         
         if stop is None:
@@ -31,9 +35,11 @@ class Simpy:
             current_value += step
 
     def sum(self):
+        """Define sum!"""
         return float(sum(self.values))
     
     def __add__(self, rhs: Union[float, Simpy]) -> Simpy:
+        """Define add."""
         result_values = []
 
         if isinstance(rhs, float):
@@ -46,6 +52,7 @@ class Simpy:
             return Simpy(result_values)
         
     def __pow__(self, rhs: Union[float, Simpy]) -> Simpy:
+        """Define pow values."""
         result_values = []
 
         if isinstance(rhs, float):
@@ -59,6 +66,7 @@ class Simpy:
         return Simpy(result_values)
     
     def __eq__(self, rhs: Union[float, Simpy]) -> list[bool]:
+        """Define eq."""
         result_values = []
 
         if isinstance(rhs, float):
@@ -72,6 +80,7 @@ class Simpy:
         return result_values
     
     def __gt__(self, rhs: Union[float, Simpy]) -> list[bool]:
+        """Define gt."""
         result_values = []
 
         if isinstance(rhs, float):
@@ -85,6 +94,7 @@ class Simpy:
         return result_values
     
     def __getitem__(self, rhs: Union[int, list[bool]]) -> Union[float, Simpy]:
+        """Define getitem."""
         if isinstance(rhs, int):
             # Subscription with an int
             return self.values[rhs]
@@ -98,6 +108,7 @@ class Simpy:
     # TODO: Check for understanding 1
 
     # Create a Simpy object with values from 0 to 15 using arange
+
 powers_of_two_indices = Simpy([])  # This will hold the indices (0 to 15)
 powers_of_two_indices.arange(0, 16)
 
@@ -110,7 +121,7 @@ powers_of_two = base_value ** powers_of_two_indices
 # Print the result
 print(powers_of_two)
 
-    # TODO: Check for Understanding 2
+# TODO: Check for Understanding 2
 
 max_temps = Simpy([21.0, 30.0, 41.0, 31.0, 45.0, 31.5])
 precip = Simpy([0.0, 1.5, 0.1, 0.3, 0.2, 0.8])
