@@ -109,6 +109,7 @@ class Simpy:
 
     # Create a Simpy object with values from 0 to 15 using arange
 
+
 powers_of_two_indices = Simpy([])  # This will hold the indices (0 to 15)
 powers_of_two_indices.arange(0, 16)
 
