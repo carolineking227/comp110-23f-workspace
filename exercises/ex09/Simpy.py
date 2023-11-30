@@ -10,17 +10,21 @@ class Simpy:
     """Create class Simpy!"""
     values: list[float]
 
+
 def __init__(self, values):
     """Define init values."""
     self.values = values
+
 
 def __str__(self):
     """Define str."""
     return f"Simpy({self.values})"
     
+
 def fill(self, value, num_values):
     """Define fill."""
     self.values = [value] * num_values
+
 
 def arange(self, start, stop=None, step=1.0):
     """Define arrange."""
@@ -34,10 +38,12 @@ def arange(self, start, stop=None, step=1.0):
         self.values.append(current_value)
         current_value += step
 
+
 def sum(self):
     """Define sum!"""
     return float(sum(self.values))
     
+
 def __add__(self, rhs: Union[float, Simpy]) -> Simpy:
     """Define add."""
     result_values = []
@@ -51,6 +57,7 @@ def __add__(self, rhs: Union[float, Simpy]) -> Simpy:
         result_values = [a + b for a, b in zip(self.values, rhs.values)]
         return Simpy(result_values)
         
+
 def __pow__(self, rhs: Union[float, Simpy]) -> Simpy:
     """Define pow values."""
     result_values = []
@@ -65,6 +72,7 @@ def __pow__(self, rhs: Union[float, Simpy]) -> Simpy:
 
     return Simpy(result_values)
     
+
 def __eq__(self, rhs: Union[float, Simpy]) -> list[bool]:
     """Define eq."""
     result_values = []
@@ -79,6 +87,7 @@ def __eq__(self, rhs: Union[float, Simpy]) -> list[bool]:
 
     return result_values
     
+
 def __gt__(self, rhs: Union[float, Simpy]) -> list[bool]:
     """Define gt."""
     result_values = []
@@ -92,6 +101,7 @@ def __gt__(self, rhs: Union[float, Simpy]) -> list[bool]:
         result_values = [a > b for a, b in zip(self.values, rhs.values)]
 
     return result_values
+    
     
 def __getitem__(self, rhs: Union[int, list[bool]]) -> Union[float, Simpy]:
     """Define getitem."""
