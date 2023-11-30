@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 from typing import Union
+from Simpy import Simpy
 
 __author__ = "730494174"
 
