@@ -10,10 +10,12 @@ from typing import Union
 
 
 class Simpy:
+    """"Class Simpy input for functions below."""
     
     def __init__(self, values: list[float]):
         """Constructor for Simpy class."""
         self.values = values
+
 
 # Test the constructor
 ones = Simpy([1.0, 1.0, 1.0, 1.0, 1.0])
@@ -21,8 +23,9 @@ print(ones.values)
 
 
 def __str__(self) -> str:
-        """String representation of Simpy."""
-        return f"Simpy({self.values})"
+    """String representation of Simpy."""
+    return f"Simpy({self.values})"
+
 
 # Test the __str__ method
 ones = Simpy([1.0, 1.0, 1.0, 1.0, 1.0])
@@ -32,6 +35,7 @@ print(ones)
 def fill(self, value: float, count: int) -> None:
         """Fill the values list with a specific number of repeating values."""
         self.values = [value] * count
+
 
 # Test the fill method
 twos = Simpy([])
@@ -58,6 +62,7 @@ def arange(self, start: float, stop: float, step: float = 1.0) -> None:
             self.values.append(current_value)
             current_value += step
 
+
 # Test the arange method
 positive = Simpy([])
 positive.arange(1.0, 5.0)
@@ -75,6 +80,7 @@ print("Actual:", negative, " - Expected: Simpy([-1.0, -2.0, -3.0, -4.0])")
 def sum(self) -> float:
         """Compute and return the sum of all items in the values attribute."""
         return sum(self.values)
+
 
 # Test the sum method
 ones = Simpy([1.0, 1.0, 1.0])
@@ -96,6 +102,7 @@ def __add__(self, rhs: Union[float, "Simpy"]) -> "Simpy":
             raise TypeError("Unsupported operand type for +: Simpy and {}".format(type(rhs)))
 
         return Simpy(result_values)
+
 
 # Test the __add__ method
 a = Simpy([1.0, 1.0, 1.0])
@@ -123,6 +130,7 @@ def __pow__(self, rhs: Union[float, "Simpy"]) -> "Simpy":
             raise TypeError("Unsupported operand type for **: Simpy and {}".format(type(rhs)))
 
         return Simpy(result_values)
+
 
 # This cell tests a Simpy ** Simpy
 a = Simpy([2.0, 2.0, 2.0])
@@ -160,6 +168,7 @@ def __eq__(self, rhs: Union[float, "Simpy"]) -> list[bool]:
 
         return result_values
 
+
 # Test the __eq__ method
 a = Simpy([1.0, 2.0, 3.0, 4.0])
 b = Simpy([1.0, 2.0, 1.0, 4.0])
@@ -175,16 +184,17 @@ print("Actual:", a == 2.0, " - Expected: [False, True, False, False]")
 
 
 def __gt__(self, rhs: Union[float, "Simpy"]) -> list[bool]:
-        """Overloaded greater than operator."""
-        if isinstance(rhs, Simpy):
-            assert len(self.values) == len(rhs.values), "Both Simpy objects must have equal lengths"
-            result_values = [x > y for x, y in zip(self.values, rhs.values)]
-        elif isinstance(rhs, float):
-            result_values = [x > rhs for x in self.values]
-        else:
-            raise TypeError("Unsupported operand type for >: Simpy and {}".format(type(rhs)))
+    """Overloaded greater than operator."""
+    if isinstance(rhs, Simpy):
+        assert len(self.values) == len(rhs.values), "Both Simpy objects must have equal lengths"
+        result_values = [x > y for x, y in zip(self.values, rhs.values)]
+    elif isinstance(rhs, float):
+        result_values = [x > rhs for x in self.values]
+    else:
+        raise TypeError("Unsupported operand type for >: Simpy and {}".format(type(rhs)))
 
-        return result_values
+    return result_values
+
 
 # Test the __gt__ method
 a = Simpy([1.0, 2.0, 3.0, 4.0])
@@ -200,17 +210,6 @@ print("Actual:", b, " - Expected: [False, False, True, True]")
 print("Actual:", a > 3.0, " - Expected: [False, False, False, True]")
 
 
-def __getitem__(self, index: int) -> float:
-    """Overloaded subscription operator to read specific items."""
-    return self.values[index]
-
-# Test the __getitem__ method
-a = Simpy([10.0, 20.0, 30.0])
-print("Actual:", a[0], " - Expected: 10.0")
-print("Actual:", a[1], " - Expected: 20.0")
-print("Actual:", a[2], " - Expected: 30.0")
-
-
 def __getitem__(self, rhs: Union[int, list[bool]]) -> Union[float, "Simpy"]:
     """Overloaded subscription operator to read specific items or filter with a mask."""
     if isinstance(rhs, int):
@@ -219,6 +218,7 @@ def __getitem__(self, rhs: Union[int, list[bool]]) -> Union[float, "Simpy"]:
         return Simpy([x for i, x in enumerate(self.values) if rhs[i]])
     else:
         raise TypeError("Unsupported operand type for subscription: Simpy and {}".format(type(rhs)))
+
 
 # Test the __getitem__ method for filtering with a mask
 a = Simpy([1.0, 2.0, 3.0, 4.0, 2.0, 1.0])
