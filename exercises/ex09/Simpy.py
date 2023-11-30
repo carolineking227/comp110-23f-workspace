@@ -3,14 +3,13 @@
 __author__ = "730494174"
 
 
-# Import the class being implemented
+from typing import Union
 from Simpy import Simpy
 print(f"{Simpy} successfully imported.")
-from typing import Union
 
 
 class Simpy:
-    """"Class Simpy input for functions below."""
+    """Class Simpy input for functions below."""
     
     def __init__(self, values: list[float]):
         """Constructor for Simpy class."""
@@ -33,8 +32,8 @@ print(ones)
 
 
 def fill(self, value: float, count: int) -> None:
-        """Fill the values list with a specific number of repeating values."""
-        self.values = [value] * count
+    """Fill the values list with a specific number of repeating values."""
+    self.values = [value] * count
 
 
 # Test the fill method
@@ -54,13 +53,13 @@ print("Actual:", mixed, " - Expected: Simpy([2.0, 2.0])")
 
 
 def arange(self, start: float, stop: float, step: float = 1.0) -> None:
-        """Fill the values list with a range of values."""
-        assert step != 0.0, "Step cannot be 0.0"
+    """Fill the values list with a range of values."""
+    assert step != 0.0, "Step cannot be 0.0"
         
-        current_value = start
-        while (step > 0 and current_value < stop) or (step < 0 and current_value > stop):
-            self.values.append(current_value)
-            current_value += step
+    current_value = start
+    while (step > 0 and current_value < stop) or (step < 0 and current_value > stop):
+        self.values.append(current_value)
+        current_value += step
 
 
 # Test the arange method
@@ -78,8 +77,8 @@ print("Actual:", negative, " - Expected: Simpy([-1.0, -2.0, -3.0, -4.0])")
 
 
 def sum(self) -> float:
-        """Compute and return the sum of all items in the values attribute."""
-        return sum(self.values)
+    """Compute and return the sum of all items in the values attribute."""
+    return sum(self.values)
 
 
 # Test the sum method
@@ -92,16 +91,16 @@ print("Actual:", one_to_nine.sum(), " - Expected: 45.0")
 
 
 def __add__(self, rhs: Union[float, "Simpy"]) -> "Simpy":
-        """Overloaded addition operator."""
-        if isinstance(rhs, Simpy):
-            assert len(self.values) == len(rhs.values), "Both Simpy objects must have equal lengths"
-            result_values = [x + y for x, y in zip(self.values, rhs.values)]
-        elif isinstance(rhs, float):
-            result_values = [x + rhs for x in self.values]
-        else:
-            raise TypeError("Unsupported operand type for +: Simpy and {}".format(type(rhs)))
+    """Overloaded addition operator."""
+    if isinstance(rhs, Simpy):
+        assert len(self.values) == len(rhs.values), "Both Simpy objects must have equal lengths"
+        result_values = [x + y for x, y in zip(self.values, rhs.values)]
+    elif isinstance(rhs, float):
+        result_values = [x + rhs for x in self.values]
+    else:
+        raise TypeError("Unsupported operand type for +: Simpy and {}".format(type(rhs)))
 
-        return Simpy(result_values)
+    return Simpy(result_values)
 
 
 # Test the __add__ method
@@ -120,16 +119,16 @@ print("Actual:", a + 1.0, " - Expected: Simpy([2.0, 3.0, 4.0])")
 
 
 def __pow__(self, rhs: Union[float, "Simpy"]) -> "Simpy":
-        """Overloaded power operator."""
-        if isinstance(rhs, Simpy):
-            assert len(self.values) == len(rhs.values), "Both Simpy objects must have equal lengths"
-            result_values = [x ** y for x, y in zip(self.values, rhs.values)]
-        elif isinstance(rhs, float):
-            result_values = [x ** rhs for x in self.values]
-        else:
-            raise TypeError("Unsupported operand type for **: Simpy and {}".format(type(rhs)))
+    """Overloaded power operator."""
+    if isinstance(rhs, Simpy):
+        assert len(self.values) == len(rhs.values), "Both Simpy objects must have equal lengths"
+        result_values = [x ** y for x, y in zip(self.values, rhs.values)]
+    elif isinstance(rhs, float):
+        result_values = [x ** rhs for x in self.values]
+    else:
+        raise TypeError("Unsupported operand type for **: Simpy and {}".format(type(rhs)))
 
-        return Simpy(result_values)
+    return Simpy(result_values)
 
 
 # This cell tests a Simpy ** Simpy
@@ -157,16 +156,16 @@ print(powers_of_2)
 
 
 def __eq__(self, rhs: Union[float, "Simpy"]) -> list[bool]:
-        """Overloaded equality operator."""
-        if isinstance(rhs, Simpy):
-            assert len(self.values) == len(rhs.values), "Both Simpy objects must have equal lengths"
-            result_values = [x == y for x, y in zip(self.values, rhs.values)]
-        elif isinstance(rhs, float):
-            result_values = [x == rhs for x in self.values]
-        else:
-            raise TypeError("Unsupported operand type for ==: Simpy and {}".format(type(rhs)))
+    """Overloaded equality operator."""
+    if isinstance(rhs, Simpy):
+        assert len(self.values) == len(rhs.values), "Both Simpy objects must have equal lengths"
+        result_values = [x == y for x, y in zip(self.values, rhs.values)]
+    elif isinstance(rhs, float):
+        result_values = [x == rhs for x in self.values]
+    else:
+        raise TypeError("Unsupported operand type for ==: Simpy and {}".format(type(rhs)))
 
-        return result_values
+    return result_values
 
 
 # Test the __eq__ method
