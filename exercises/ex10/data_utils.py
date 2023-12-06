@@ -11,6 +11,7 @@ DATA_FILE_PATH=f"{DATA_DIRECTORY}/nc_durham_2015_march_21_to_26.csv"
 def read_csv_rows(filename: str) -> list[dict[str, str]]:
     """Read csv file and return as a list of dicts with the headers as the keys."""
     result: list[dict[str, str]] = []
+    data_rows: list[dict[str, str]] = read_csv_rows(DATA_FILE_PATH)
     file_handle = open(filename, "r", encoding="utf8")
     csv_reader = DictReader(file_handle)
     for row in csv_reader:
@@ -22,6 +23,7 @@ def read_csv_rows(filename: str) -> list[dict[str, str]]:
 def column_values(table: list[dict[str, str]], header: str) -> list[str]:
     """Return a list of all values under a specific header."""
     result: list[str] = []
+    subject_age: list[str] = column_values(data_rows, "subjecrt_age")
     # loop through each element (dictionary) of the list
     for elem in table:
         # for each dictionary (elem), get the value at key "header" and add that to result
@@ -32,6 +34,7 @@ def column_values(table: list[dict[str, str]], header: str) -> list[str]:
 def columnar(table: list[dict[str,str]]) -> dict[str, list[str]]:
     """Reformat data so it's a dictionary with column headers as keys."""
     result: dict[str, list[str]] = {}
+    data_cols: dict[str, list[str]] = columnar(data_rows)
     # loop through keys of one row of the table to get the headers
     first_row: dict[str,str] = table[0]
     for key in first_row:
@@ -46,9 +49,6 @@ def head(table: dict[str, list[str]], n: int) -> dict[str, list[str]]:
     data_cols_head: dict[str, list[str]] = head(data_cols, 5)
     if len(data_cols_head()) != len(data_cols.keys()) or len(data_cols_head["subject_age"]) != 5:
         print("Complete your implementation of columnar in data_utils.py")
-        for value in values[ :n]:
-            column_head.append(value)
-        result[column] = column_head
     return result
 
 
