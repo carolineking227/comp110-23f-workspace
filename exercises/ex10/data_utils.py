@@ -5,6 +5,7 @@ __author__ = "730494174"
 from csv import DictReader
 from tabulate import tabulate
 from data_utils import head
+from data_utils import select
 
 DATA_DIRECTORY="../../data"
 DATA_FILE_PATH=f"{DATA_DIRECTORY}/nc_durham_2015_march_21_to_26.csv"
@@ -49,7 +50,7 @@ def head(table: dict[str, list[str]], n: int) -> dict[str, list[str]]:
         result[column] = values[ :n]
     return result
 
-#data_rows = read_csv_rows(DATA_FILE_PATH)
-#data_cols = columnar(data_rows)
-#data_cols_head = head(data_cols, 5)
-#print(data_cols_head)
+data_rows = read_csv_rows(DATA_FILE_PATH)
+data_cols = columnar(data_rows)
+data_cols_head = head(data_cols, 5)
+print(data_cols_head)
