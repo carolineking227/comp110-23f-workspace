@@ -40,6 +40,8 @@ def columnar(table: list[dict[str,str]]) -> dict[str, list[str]]:
 
 def head(table: dict[str, list[str]], n: int) -> dict[str, list[str]]:
     """Produce a column with only the first N rows of data for each column!"""
+    data_cols_head: dict[str, list[str]] = head(data_cols, 5)
+    
     result = {}
     # loop through each coolumn in the first row and establist an empty list to store values
     for column, values in table.items():
