@@ -46,13 +46,19 @@ def columnar(table: list[dict[str,str]]) -> dict[str, list[str]]:
 def head(table: dict[str, list[str]], n: int) -> dict[str, list[str]]:
     """Produce a column with only the first N rows of data for each column!"""
     result = {}
+    data_rows = read_csv_rows(DATA_FILE_PATH)
+    data_cols = columnar(data_rows)
+    data_cols_head = head(data_cols, 5)
     data_cols_head: dict[str, list[str]] = head(data_cols, 5)
     if len(data_cols_head()) != len(data_cols.keys()) or len(data_cols_head["subject_age"]) != 5:
         print("Complete your implementation of columnar in data_utils.py")
     return result
 
 
-data_rows = read_csv_rows(DATA_FILE_PATH)
-data_cols = columnar(data_rows)
-data_cols_head = head(data_cols, 5)
-print(data_cols_head)
+def select(table: dict[str, list[str]], selected_columns: list[str]) -> dict[str, list[str]]:
+    """Retype here."""
+    result = {}
+    for column in selected_columns:
+        if column in table:
+            result[column] = table[column]
+    return result
