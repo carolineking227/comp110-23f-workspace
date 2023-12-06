@@ -103,129 +103,129 @@ class Simpy:
             raise TypeError("Unsupported operand type for subscription: Simpy and {}".format(type(rhs)))
 
 
-# Test the constructor
-ones = Simpy([1.0, 1.0, 1.0, 1.0, 1.0])
-print(ones.values)
+    # Test the constructor
+    ones = Simpy([1.0, 1.0, 1.0, 1.0, 1.0])
+    print(ones.values)
 
-# Test the __str__ method
-ones = Simpy([1.0, 1.0, 1.0, 1.0, 1.0])
-print(ones)
+    # Test the __str__ method
+    ones = Simpy([1.0, 1.0, 1.0, 1.0, 1.0])
+    print(ones)
 
-# Test the fill method
-twos = Simpy([])
-twos.fill(2.0, 3)
-print("Actual:", twos, " - Expected: Simpy([2.0, 2.0, 2.0])")
+    # Test the fill method
+    twos = Simpy([])
+    twos.fill(2.0, 3)
+    print("Actual:", twos, " - Expected: Simpy([2.0, 2.0, 2.0])")
 
-twos.fill(2.0, 5)
-print("Actual:", twos, " - Expected: Simpy([2.0, 2.0, 2.0, 2.0, 2.0])")
+    twos.fill(2.0, 5)
+    print("Actual:", twos, " - Expected: Simpy([2.0, 2.0, 2.0, 2.0, 2.0])")
 
-mixed = Simpy([])
-mixed.fill(3.0, 3)
-print("Actual:", mixed, " - Expected: Simpy([3.0, 3.0, 3.0])")
+    mixed = Simpy([])
+    mixed.fill(3.0, 3)
+    print("Actual:", mixed, " - Expected: Simpy([3.0, 3.0, 3.0])")
 
-mixed.fill(2.0, 2)
-print("Actual:", mixed, " - Expected: Simpy([2.0, 2.0])")
+    mixed.fill(2.0, 2)
+    print("Actual:", mixed, " - Expected: Simpy([2.0, 2.0])")
 
-# Test the arange method
-positive = Simpy([])
-positive.arange(1.0, 5.0)
-print("Actual:", positive, " - Expected: Simpy([1.0, 2.0, 3.0, 4.0])")
+    # Test the arange method
+    positive = Simpy([])
+    positive.arange(1.0, 5.0)
+    print("Actual:", positive, " - Expected: Simpy([1.0, 2.0, 3.0, 4.0])")
 
-fractional = Simpy([])
-fractional.arange(0.0, 1.0, 0.25)
-print("Actual:", fractional, " - Expected: Simpy([0.0, 0.25, 0.5, 0.75])")
+    fractional = Simpy([])
+    fractional.arange(0.0, 1.0, 0.25)
+    print("Actual:", fractional, " - Expected: Simpy([0.0, 0.25, 0.5, 0.75])")
 
-negative = Simpy([])
-negative.arange(-1.0, -5.0, -1.0)
-print("Actual:", negative, " - Expected: Simpy([-1.0, -2.0, -3.0, -4.0])")
+    negative = Simpy([])
+    negative.arange(-1.0, -5.0, -1.0)
+    print("Actual:", negative, " - Expected: Simpy([-1.0, -2.0, -3.0, -4.0])")
 
-# Test the sum method
-ones = Simpy([1.0, 1.0, 1.0])
-print("Actual:", ones.sum(), " - Expected: 3.0")
+    # Test the sum method
+    ones = Simpy([1.0, 1.0, 1.0])
+    print("Actual:", ones.sum(), " - Expected: 3.0")
 
-one_to_nine = Simpy([])
-one_to_nine.arange(1.0, 10.0)
-print("Actual:", one_to_nine.sum(), " - Expected: 45.0")
+    one_to_nine = Simpy([])
+    one_to_nine.arange(1.0, 10.0)
+    print("Actual:", one_to_nine.sum(), " - Expected: 45.0")
 
-# Test the __add__ method
-a = Simpy([1.0, 1.0, 1.0])
-b = Simpy([2.0, 3.0, 4.0])
-c = a + b
-print("Actual:", c, " - Expected: Simpy([3.0, 4.0, 5.0])")
-print("Actual:", a + a, " - Expected: Simpy([2.0, 2.0, 2.0])")
-print("Actual:", b + b, " - Expected: Simpy([4.0, 6.0, 8.0])")
+    # Test the __add__ method
+    a = Simpy([1.0, 1.0, 1.0])
+    b = Simpy([2.0, 3.0, 4.0])
+    c = a + b
+    print("Actual:", c, " - Expected: Simpy([3.0, 4.0, 5.0])")
+    print("Actual:", a + a, " - Expected: Simpy([2.0, 2.0, 2.0])")
+    print("Actual:", b + b, " - Expected: Simpy([4.0, 6.0, 8.0])")
 
-# Test a Simpy + float
-a = Simpy([1.0, 2.0, 3.0])
-b = a + 10.0
-print("Actual:", b, " - Expected: Simpy([11.0, 12.0, 13.0])")
-print("Actual:", a + 1.0, " - Expected: Simpy([2.0, 3.0, 4.0])")
+    # Test a Simpy + float
+    a = Simpy([1.0, 2.0, 3.0])
+    b = a + 10.0
+    print("Actual:", b, " - Expected: Simpy([11.0, 12.0, 13.0])")
+    print("Actual:", a + 1.0, " - Expected: Simpy([2.0, 3.0, 4.0])")
 
-# This cell tests a Simpy ** Simpy
-a = Simpy([2.0, 2.0, 2.0])
-b = Simpy([1.0, 2.0, 3.0])
-c = a ** b
-print("Actual:", c, " - Expected: Simpy([2.0, 4.0, 8.0])")
-print("Actual:", a ** a, " - Expected: Simpy([4.0, 4.0, 4.0])")
-print("Actual:", b ** b, " - Expected: Simpy([1.0, 4.0, 27.0])")
+    # This cell tests a Simpy ** Simpy
+    a = Simpy([2.0, 2.0, 2.0])
+    b = Simpy([1.0, 2.0, 3.0])
+    c = a ** b
+    print("Actual:", c, " - Expected: Simpy([2.0, 4.0, 8.0])")
+    print("Actual:", a ** a, " - Expected: Simpy([4.0, 4.0, 4.0])")
+    print("Actual:", b ** b, " - Expected: Simpy([1.0, 4.0, 27.0])")
 
-# This cell tests a Simpy ** float
-a = Simpy([1.0, 2.0, 3.0])
-b = a ** 2.0
-print("Actual:", b, " - Expected: Simpy([1.0, 4.0, 9.0])")
-print("Actual:", a ** 3.0, " - Expected: Simpy([1.0, 8.0, 27.0])")
+    # This cell tests a Simpy ** float
+    a = Simpy([1.0, 2.0, 3.0])
+    b = a ** 2.0
+    print("Actual:", b, " - Expected: Simpy([1.0, 4.0, 9.0])")
+    print("Actual:", a ** 3.0, " - Expected: Simpy([1.0, 8.0, 27.0])")
 
-# Create a Simpy object with values ranging from 0 to 15
-exponents = Simpy([]).arange(0.0, 16.0)
+    # Create a Simpy object with values ranging from 0 to 15
+    exponents = Simpy([]).arange(0.0, 16.0)
 
-# Calculate the powers of 2 using __pow__
-powers_of_2 = 2.0 ** exponents
+    # Calculate the powers of 2 using __pow__
+    powers_of_2 = 2.0 ** exponents
 
-# Print the resulting Simpy object
-print(powers_of_2)
+    # Print the resulting Simpy object
+    print(powers_of_2)
 
-# Test the __eq__ method
-a = Simpy([1.0, 2.0, 3.0, 4.0])
-b = Simpy([1.0, 2.0, 1.0, 4.0])
-c = a == b
-print("Actual:", c, " - Expected: [True, True, False, True]")
-print("Actual:", a == a, " - Expected: [True, True, True, True]")
+    # Test the __eq__ method
+    a = Simpy([1.0, 2.0, 3.0, 4.0])
+    b = Simpy([1.0, 2.0, 1.0, 4.0])
+    c = a == b
+    print("Actual:", c, " - Expected: [True, True, False, True]")
+    print("Actual:", a == a, " - Expected: [True, True, True, True]")
 
-# Test a Simpy == float
-a = Simpy([1.0, 2.0, 1.0, 4.0])
-b = a == 1.0
-print("Actual:", b, " - Expected: [True, False, True, False]")
-print("Actual:", a == 2.0, " - Expected: [False, True, False, False]")
+    # Test a Simpy == float
+    a = Simpy([1.0, 2.0, 1.0, 4.0])
+    b = a == 1.0
+    print("Actual:", b, " - Expected: [True, False, True, False]")
+    print("Actual:", a == 2.0, " - Expected: [False, True, False, False]")
 
-# Test the __gt__ method
-a = Simpy([1.0, 2.0, 3.0, 4.0])
-b = Simpy([2.0, 1.0, 1.0, 5.0])
-c = a > b
-print("Actual:", c, " - Expected: [False, True, True, False]")
-print("Actual:", b > a, " - Expected: [True, False, False, True]")
+    # Test the __gt__ method
+    a = Simpy([1.0, 2.0, 3.0, 4.0])
+    b = Simpy([2.0, 1.0, 1.0, 5.0])
+    c = a > b
+    print("Actual:", c, " - Expected: [False, True, True, False]")
+    print("Actual:", b > a, " - Expected: [True, False, False, True]")
 
-# Test a Simpy > float
-a = Simpy([1.0, 2.0, 3.0, 4.0])
-b = a > 2.0
-print("Actual:", b, " - Expected: [False, False, True, True]")
-print("Actual:", a > 3.0, " - Expected: [False, False, False, True]")
+    # Test a Simpy > float
+    a = Simpy([1.0, 2.0, 3.0, 4.0])
+    b = a > 2.0
+    print("Actual:", b, " - Expected: [False, False, True, True]")
+    print("Actual:", a > 3.0, " - Expected: [False, False, False, True]")
 
-# Test the __getitem__ method for filtering with a mask
-a = Simpy([1.0, 2.0, 3.0, 4.0, 2.0, 1.0])
-b = a[a > 2.0]
-print("Actual:", b, " - Expected: Simpy([3.0, 4.0])")
-print("Actual:", a[a + 1.0 == 2.0], " - Expected: Simpy([1.0, 1.0])")
+    # Test the __getitem__ method for filtering with a mask
+    a = Simpy([1.0, 2.0, 3.0, 4.0, 2.0, 1.0])
+    b = a[a > 2.0]
+    print("Actual:", b, " - Expected: Simpy([3.0, 4.0])")
+    print("Actual:", a[a + 1.0 == 2.0], " - Expected: Simpy([1.0, 1.0])")
 
-max_temps = Simpy([21.0, 30.0, 41.0, 31.0, 45.0, 31.5])
-precip = Simpy([0.0, 1.5, 0.1, 0.3, 0.2, 0.8])
+    max_temps = Simpy([21.0, 30.0, 41.0, 31.0, 45.0, 31.5])
+    precip = Simpy([0.0, 1.5, 0.1, 0.3, 0.2, 0.8])
 
-# Create a mask for days where max temperature is greater than 32.0
-mask = max_temps > 32.0
+    # Create a mask for days where max temperature is greater than 32.0
+    mask = max_temps > 32.0
 
-# Use the mask to filter precipitation values
-filtered_precip = precip[mask]
+    # Use the mask to filter precipitation values
+    filtered_precip = precip[mask]
 
-# Calculate the sum of precipitation on days where max temperature is greater than 32.0
-result = filtered_precip.sum()
+    # Calculate the sum of precipitation on days where max temperature is greater than 32.0
+    result = filtered_precip.sum()
 
-print("Sum of precipitation on days where max temperature > 32.0:", result)
+    print("Sum of precipitation on days where max temperature > 32.0:", result)
