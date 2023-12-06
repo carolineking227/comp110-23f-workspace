@@ -3,6 +3,8 @@
 __author__ = "730494174"
 
 from csv import DictReader
+from tabulate import tabulate
+from data_utils import head
 
 def read_csv_rows(filename: str) -> list[dict[str, str]]:
     """Read csv file and return as a list of dicts with the headers as the keys."""
@@ -26,7 +28,7 @@ def column_values(table: list[dict[str, str]], header: str) -> list[str]:
 
 
 def columnar(table: list[dict[str,str]]) -> dict[str, list[str]]:
-    """Reformat data so it's a dictionary with column headers as keys"""
+    """Reformat data so it's a dictionary with column headers as keys."""
     result: dict[str, list[str]] = {}
     # loop through keys of one row of the table to get the headers
     first_row: dict[str,str] = table[0]
@@ -37,12 +39,9 @@ def columnar(table: list[dict[str,str]]) -> dict[str, list[str]]:
 
 
 def head(table: dict[str, list[str]], n: int) -> dict[str, list[str]]:
-    result: dict[str, list[str]] = []
+    """Produce a column with only the first N rows of data for each column!"""
+    result = {}
     # loop through each coolumn in the first row and establist an empty list to store values
     for column, values in table.items():
-        column_head = []
-        # loop through the first N values 
-        for value in values[ :n]:
-            column_head.append(value)
-        result[column] = column_head
+        result[column] = values[ :n]
     return result
