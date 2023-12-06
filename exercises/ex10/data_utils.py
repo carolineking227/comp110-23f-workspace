@@ -6,6 +6,9 @@ from csv import DictReader
 from tabulate import tabulate
 from data_utils import head
 
+DATA_DIRECTORY="../../data"
+DATA_FILE_PATH=f"{DATA_DIRECTORY}/nc_durham_2015_march_21_to_26.csv"
+
 def read_csv_rows(filename: str) -> list[dict[str, str]]:
     """Read csv file and return as a list of dicts with the headers as the keys."""
     result: list[dict[str, str]] = []
@@ -40,8 +43,9 @@ def columnar(table: list[dict[str,str]]) -> dict[str, list[str]]:
 
 def head(table: dict[str, list[str]], n: int) -> dict[str, list[str]]:
     """Produce a column with only the first N rows of data for each column!"""
+    data_cols: dict[str, list[str]] = columnar(data_rows)
     data_cols_head: dict[str, list[str]] = head(data_cols, 5)
-    
+    data_rows: list[dict[str, str]] = read_csv_rows(DATA_FILE_PATH)
     result = {}
     # loop through each coolumn in the first row and establist an empty list to store values
     for column, values in table.items():
