@@ -1,49 +1,51 @@
-"""Ex02- one shot wordle"""
+"""Ex02- one shot wordle."""
     
-__author__="730494174"
+__author__ = "730494174"
 
-correct_answer: str = "python"
-correct_answer_len: int = len(correct_answer)
-guess: str = input("What is your 6-letter guess? ")
 
-#variables
-i: int = 0 
-guess_boxes: str = ""
-new_counter: int = 0
-alt_ind: int = 0
-wrong_place: bool = False
+secret_word = "python"
+guess = input(f"What is your {len(secret_word)}-letter guess? ")
 
-#coded boxes for printing
-WHITE_BOX: str ="\U00002B1C"
+while len(guess) != len(secret_word):
+    guess = input(f"That was not {len(secret_word)} letters! Try again: ")
+
+WHITE_BOX: str = "\U00002B1C"
 GREEN_BOX: str = "\U0001F7E9"
 YELLOW_BOX: str = "\U0001F7E8"
 
-while len(guess) != len(correct_answer):
-     guess = input("That was not 6-letters! Try again: ")
+ind = 0
+result = ""
 
-while i < len(correct_answer): 
-   if guess[i] == correct_answer[i]:
-        guess_boxes: str = guess_boxes + GREEN_BOX
-        GREEN_BOX: str = "\U0001F7E9"
-        i += 1
-   elif guess[i] == correct_answer[alt_ind]:
-             wrong_place = True
-             guess_boxes: str = guess_boxes + YELLOW_BOX
-   else: 
-         guess_boxes: str = guess_boxes + WHITE_BOX
-         i += 1
-         WHITE_BOX: str = "\U00002B1C"
-while wrong_place == False and i < len(correct_answer):
-        if guess[i] == correct_answer[alt_ind]:
-             wrong_place = True
-             guess_boxes: str = guess_boxes + YELLOW_BOX
-        else:
-             alt_ind += 1
-        
-#print information 
-if guess == correct_answer:
-   print(guess_boxes)
-   print("Woo! You got it! ")
+while ind < len(secret_word):
+    if guess[ind] == secret_word[ind]:
+        result += GREEN_BOX
+    else:
+        result += YELLOW_BOX
+    ind += 1
+
+ind = 0
+while ind < len(secret_word):
+    if guess[ind] != secret_word[ind]:
+        wrong_place = False
+
+        alt_index = 0
+
+        while not wrong_place and alt_index < len(secret_word):
+            if guess[ind] == secret_word[alt_index] and alt_index != ind:
+                wrong_place = True
+            else:
+                alt_index += 1
+                
+if wrong_place:
+        result += YELLOW_BOX
+else: 
+        result += WHITE_BOX
+
+ind += 1
+
+print(result)
+
+if result.count(GREEN_BOX) == len(secret_word):
+    print("Woo! You got it!")
 else:
-    print(guess_boxes)
-    print("Not quite. Play again soon! ")
+    print("Not quite. Play again soon!")

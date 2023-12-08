@@ -10,7 +10,7 @@ chosen_letter = input("Enter a single character: ")
 if len(chosen_letter) != 1:
     print("Error: Character must be a single character.")
     exit()
-print("Searching for {chosen_letter} in {chosen_word}")
+print("Searching for " + chosen_letter + " in " + chosen_word)
 
 count = 0
 
@@ -20,8 +20,8 @@ for i in range(len(chosen_word)):
         count += 1
 
 if count == 0:
-    print("No instances of {chosen_letter} in {chosen_word}")
+    print("No instances of " + chosen_letter + " found in " + chosen_word)
 elif count == 1:
-    print("1 instance of {chosen_letter} found in {chosen_word}")
+    print("1 instance of " + chosen_letter + " found in " + chosen_word)
 else:
-    print("{count} instances of {chosen_letter} in {chosen_word}")
+    print(f"{count} instances of {chosen_letter} found in {chosen_word}")

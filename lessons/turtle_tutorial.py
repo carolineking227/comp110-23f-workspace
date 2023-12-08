@@ -1,43 +1,76 @@
-from turtle import Turtle, colormode
-colormode(255)
+from turtle import Turtle, colormode, done
+
+# Setting up the turtle
 leo: Turtle = Turtle()
-bob: Turtle = Turtle()
 
-"""Describe leo's attibutes and center leo!"""
-leo.color(57, 44, 91)
-leo.penup()
-leo.goto(0, 0)
-leo.pendown()
-leo.speed(50)
+# Exercise One: Draw a square
+for _ in range(4):
+    leo.forward(300)
+    leo.left(90)
 
-"""Draw the triangle while filling it in!"""
-leo.begin_fill()
+# Simplifying with Loops
 i: int = 0
-while (i < 3):
+while i < 3:
     leo.forward(300)
     leo.left(120)
-    i = i + 1
+    i += 1
+
+# GoTo, Penup, and Pendown
+leo.penup()
+leo.goto(45, 60)
+leo.pendown()
+
+# Exercise Two: Draw a triangle
+i = 0
+while i < 3:
+    leo.forward(300)
+    leo.left(120)
+    i += 1
+
+# Pen Color
+leo.color("blue")
+
+# Fill Color
+leo.begin_fill()
+i = 0
+while i < 3:
+    leo.forward(300)
+    leo.left(120)
+    i += 1
 leo.end_fill()
 
-"""Describe bob's attributes and center bob!"""
-bob.color(47, 28, 87)
-bob.penup()
-bob.goto(0, 0)
-bob.pendown()
-bob.speed(70)
+# Other Useful Color Commands
+leo.pencolor("pink")
+leo.fillcolor(32, 67, 93)
+leo.color("green", "yellow")
 
-"""Have bob draw an outline for the triangle without filling it in!"""
+# Exercise Three: Color Picker values
+# Try different RGB values for colors
+
+# Speed, Visibility, and the Fun Part
+leo.speed(50)
+leo.hideturtle()
+
+# Mini-Project
+bob: Turtle = Turtle()
+
+# Setting up Bob
+bob.color("black")
+bob.penup()
+bob.goto(45, 60)
+bob.pendown()
+bob.speed(50)
+
+# Create an outline of Leo's filled-in triangle
 side_length: int = 300
-i: int = 0
-while (i < 3):
+for _ in range(3):
     bob.forward(side_length)
     bob.left(120)
-    i = i + 1
 
-""""Have bob draw another outline for a slightly different triangle!"""
-side_length = side_length * 0.97
-i: int = 0
-while (i < 3):
+# Duplicate the code for more linework
+for _ in range(200):  # Experiment with the number of loops
     bob.forward(side_length)
-    bob.left(121)
-    i = i + 1
+    bob.left(120.5)  # Experiment with the angle
+    side_length = side_length * 0.97
+
+done()
